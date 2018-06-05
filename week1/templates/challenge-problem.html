@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Challenge problem</title>
+</head>
+<body>
+<Form action="add_movie" method="POST">
+    <p>Add movie</p>
+    <label for="title">Movie Title</label>
+    <input type="text" id="title" name="title"/>
+    <label for="year">Year released</label>
+    <input type="text" id="year" name="year"/>
+    <label for="imdb">IMDB No.</label>
+    <input type="text" id="imdb" name="imdb"/>
+    <button type="submit" value="submit">Submit</button>
+</Form>
+<hr />
+<h1>Movies</h1>
+<ul>
+    {% for movie in movies %}
+    <li><a href="https://www.imdb.com/title/{{movie.imdb}}">{{movie.title}}</a>, {{movie.year}}</li>
+    {% else %}
+    <li>No movies Found</li>
+    {% endfor %}
+</ul>
+
+</body>
+</html>

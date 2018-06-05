@@ -1,0 +1,8 @@
+<h1>Movies</h1>
+<ul>
+{% for movie in movies %}
+    <li><a href="https://www.imdb.com/title/{{movie.imdb}}">{{movie.title}}</a>, {{movie.year}}</li>
+{% else %}
+<li>No movies Found</li>
+{% endfor %}
+</ul>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fruit Picker</title>
+</head>
+<body>
+    <Form action="favorite_fruit" method="POST">
+        <p>What is your favourite fruit?</p>
+        <ul>
+        {% for fruit in fruits %}
+            <li>
+                <input type="radio" name="fruit"
+                       value="{{fruit}}">{{fruit}}</input>
+            </li>
+            {% endfor %}
+            <button type="submit" value="submit">Submit</button>
+        </ul>
+    </Form>
+
+</body>
+</html>
