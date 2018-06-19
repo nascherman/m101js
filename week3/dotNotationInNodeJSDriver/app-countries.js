@@ -1,31 +1,31 @@
 var MongoClient = require('mongodb').MongoClient,
-    commandLineArgs = require('command-line-args'),
+    commandLineArgs = require('command-line-args'), 
     assert = require('assert');
 
 
 var options = commandLineOptions();
 
-MongoClient.connect('mongodb://localhost:27017/crunchbase', function (err, db) {
+
+MongoClient.connect('mongodb://localhost:27017/crunchbase', function(err, db) {
 
     assert.equal(err, null);
     console.log("Successfully connected to MongoDB.");
-    console.log("Options", options);
-
+    
     var query = queryDocument(options);
-    var projection = {
-        "_id": 1, "name": 1, "founded_year": 1,
-        "number_of_employees": 1, "crunchbase_url": 1
-    };
+    var projection = {"_id": 0,
+                      "name": 1,
+                      "offices.country_code": 1,
+                      "ipo.valuation_amount": 1};
 
     var cursor = db.collection('companies').find(query, projection);
     var numMatches = 0;
 
     cursor.forEach(
-        function (doc) {
+        function(doc) {
             numMatches = numMatches + 1;
-            console.log(doc);
+            console.log( doc );
         },
-        function (err) {
+        function(err) {
             assert.equal(err, null);
             console.log("Our query was:" + JSON.stringify(query));
             console.log("Matching documents: " + numMatches);
@@ -39,7 +39,7 @@ MongoClient.connect('mongodb://localhost:27017/crunchbase', function (err, db) {
 function queryDocument(options) {
 
     console.log(options);
-
+    
     var query = {
         "founded_year": {
             "$gte": options.firstYear,
@@ -48,24 +48,38 @@ function queryDocument(options) {
     };
 
     if ("employees" in options) {
-        query.number_of_employees = {"$gte": options.employees};
+        query.number_of_employees = { "$gte": options.employees };
+    }
+    
+    if ("ipo" in options) {
+        if (options.ipo == "yes") {
+            query["ipo.valuation_amount"] = {"$exists": true, "$ne": null};
+        } else if (options.ipo == "no") {
+            query["ipo.valuation_amount"] = null;
+        }               
     }
 
+    if ("country" in options) {
+        query["offices.country_code"] = options.country;
+    }
+    
     return query;
-
+    
 }
 
 
 function commandLineOptions() {
 
     var cli = commandLineArgs([
-        {name: "firstYear", alias: "f", type: Number},
-        {name: "lastYear", alias: "l", type: Number},
-        {name: "employees", alias: "e", type: Number}
+        { name: "firstYear", alias: "f", type: Number },
+        { name: "lastYear", alias: "l", type: Number },
+        { name: "employees", alias: "e", type: Number },
+        { name: "ipo", alias: "i", type: String },
+        { name: "country", alias: "c", type: String }
     ]);
-
+    
     var options = cli.parse()
-    if (!(("firstYear" in options) && ("lastYear" in options))) {
+    if ( !(("firstYear" in options) && ("lastYear" in options))) {
         console.log(cli.getUsage({
             title: "Usage",
             description: "The first two options below are required. The rest are optional."
@@ -74,7 +88,7 @@ function commandLineOptions() {
     }
 
     return options;
-
+    
 }
 
 
