@@ -1,0 +1,17 @@
+{
+  "name": "week6",
+  "version": "1.0.0",
+  "description": "",
+  "main": "familiarOperationsExamples.js",
+  "dependencies": {
+    "assert": "^1.4.1",
+    "mongod": "^2.0.0",
+    "mongodb": "^3.1.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "postinstall": "mongoimport --drop -d crunchbase -c companies ../companies.json"
+  },
+  "author": "",
+  "license": "ISC"
+}
