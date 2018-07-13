@@ -1,0 +1,18 @@
+2018-07-13T17:11:06.253-0400 I CONTROL  [initandlisten] MongoDB starting : pid=14865 port=27017 dbpath=/home/nascherman/data/rs1 64-bit host=nascherman-UX305CA
+2018-07-13T17:11:06.254-0400 I CONTROL  [initandlisten] db version v3.6.5
+2018-07-13T17:11:06.254-0400 I CONTROL  [initandlisten] git version: a20ecd3e3a174162052ff99913bc2ca9a839d618
+2018-07-13T17:11:06.254-0400 I CONTROL  [initandlisten] OpenSSL version: OpenSSL 1.0.2g  1 Mar 2016
+2018-07-13T17:11:06.254-0400 I CONTROL  [initandlisten] allocator: tcmalloc
+2018-07-13T17:11:06.254-0400 I CONTROL  [initandlisten] modules: none
+2018-07-13T17:11:06.254-0400 I CONTROL  [initandlisten] build environment:
+2018-07-13T17:11:06.254-0400 I CONTROL  [initandlisten]     distmod: ubuntu1604
+2018-07-13T17:11:06.254-0400 I CONTROL  [initandlisten]     distarch: x86_64
+2018-07-13T17:11:06.254-0400 I CONTROL  [initandlisten]     target_arch: x86_64
+2018-07-13T17:11:06.254-0400 I CONTROL  [initandlisten] options: { net: { port: 27017 }, processManagement: { fork: true }, replication: { oplogSizeMB: 64, replSet: "m101" }, storage: { dbPath: "/home/nascherman/data/rs1", mmapv1: { smallFiles: true } }, systemLog: { destination: "file", path: "1.log" } }
+2018-07-13T17:11:06.254-0400 E NETWORK  [initandlisten] Failed to unlink socket file /tmp/mongodb-27017.sock Operation not permitted
+2018-07-13T17:11:06.254-0400 F -        [initandlisten] Fatal Assertion 40486 at src/mongo/transport/transport_layer_asio.cpp 170
+2018-07-13T17:11:06.254-0400 F -        [initandlisten] 
+
+***aborting after fassert() failure
+
+

@@ -1,0 +1,1 @@
+mongo --port 27018  > init-replica-set.js
